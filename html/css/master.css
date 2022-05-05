@@ -7,15 +7,13 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: arial, sans-serif;
-    font-size: 13px
+    font-size: 15px
 }
 
 .card {
     background-color: cornsilk;
-    padding: 20px;
-    border-radius: 6px;
     color: black;
-    width: 18rem;
+    width: 22rem;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px;
 
 }
