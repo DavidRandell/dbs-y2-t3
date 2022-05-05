@@ -6,19 +6,18 @@ body {
     justify-content: center;
     height: 100vh;
     overflow: hidden;
-    ;
     font-family: arial, sans-serif;
     font-size: 13px
 }
 
-#app {
+.card {
     background-color: cornsilk;
     padding: 20px;
-    border: 3px solid white;
     border-radius: 6px;
     color: black;
-    width: 50%;
+    width: 18rem;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px;
+
 }
 
 #tab1 {
