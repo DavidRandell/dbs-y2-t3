@@ -7,7 +7,7 @@
   <title>Test API Client</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!--<link href="css/master.css" rel="stylesheet">-->
+  <link href="css/master.css" rel="stylesheet">
   <script>
     let doIt = () => {
       let tab = document.getElementById("tab1");
@@ -30,18 +30,26 @@
 </head>
 
 <body>
-  <div id="app">
-    <img src="https://picsum.photos/400/300/" alt="Image" />
 
-    <p>This is where the results turn up:</p>
-    <table id='tab1'>
-      <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td>Email</td>
-      </tr>
-    </table>
-    <button class="btn primary" onClick="doIt()">Press me</button>
+  <div id="app" class="container-fluid">
+
+
+
+      <div class="card" style="width: 18rem;">
+        <img src="https://picsum.photos/400/300/" class="card-img-top" alt="Image">
+        <div class="card-body">
+          <h5 class="card-title">Results:</h5>
+          <table id='tab1'>
+            <tr>
+              <td>ID</td>
+              <td>Name</td>
+              <td>Email</td>
+            </tr>
+          </table>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <button type="button" class="btn btn-primary" onClick="doIt()">Press Me</button>
+        </div>
+      </div>
   </div>
 </body>
 
