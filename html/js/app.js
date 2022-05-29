@@ -72,12 +72,13 @@ class AppViewModel {
                     console.log("Hello World 0");
                     let parser = new DOMParser(); 
                     let tree = parser.parseFromString(resp,'text/xml');
-
+                    console.log("Hello World 1");
                     let objStation = [];
-
+                    console.log("Hello World 2");
                     let nodeStation = tree.getElementsByTagName("objStation");   
-
+                    console.log("Hello World 3");
                     Array.from(nodeStation).forEach(x => {
+                        console.log("Array Loop");
                         let station = {};
                         station["StationDesc"] = x.getElementsByTagName("StationDesc")[0].textContent;
                         station["StationLatitude"] = x.getElementsByTagName("StationLatitude")[0].textContent;
