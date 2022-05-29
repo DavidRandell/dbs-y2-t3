@@ -65,11 +65,11 @@ class AppViewModel {
         self.loadStations = function (selectedStationType) {
 
             $.ajax({
-                url: "../apiproxy.php",
+                url: "https://david.dbsprojects.ie/apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=' + selectedStationType },
                 dataType: 'text',
                 success: function (resp) {
-                    //console.log("Hello World 0");
+                    console.log("Hello World 0");
                     let parser = new DOMParser(); 
                     let tree = parser.parseFromString(resp,'text/xml');
 
@@ -84,7 +84,7 @@ class AppViewModel {
                         station["StationLongitude"] = x.getElementsByTagName("StationLongitude")[0].textContent;
                         station["StationCode"] = x.getElementsByTagName("StationCode")[0].textContent;
                         station["StationId"] = x.getElementsByTagName("StationId")[0].textContent;
-                        //console.log(station);
+                        console.log(station);
                         objStation.push(station);
                     });
 
@@ -161,7 +161,7 @@ class AppViewModel {
             self.displayLoader(true);
             self.trainData([]);
             $.ajax({
-                url: "../apiproxy.php",
+                url: "https://david.dbsprojects.ie/apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=' + stationCode },
                 dataType: 'text',
                 success: function (resp) {
