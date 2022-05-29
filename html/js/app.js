@@ -65,7 +65,7 @@ class AppViewModel {
         self.loadStations = function (selectedStationType) {
 
             $.ajax({
-                url: "https://davidrandell.com/trains/apiproxy.php",
+                url: "../apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=' + selectedStationType },
                 dataType: 'text',
                 success: function (resp) {
@@ -149,7 +149,7 @@ class AppViewModel {
                     // Add Marker
                     self.locationMarker = new google.maps.Marker({
                         position: pos,
-                        icon: 'https://davidrandell.com/trains/images/yourLocation.png',
+                        icon: '../images/yourLocation.png',
                         map: self.map()
                     });
                 });
@@ -161,7 +161,7 @@ class AppViewModel {
             self.displayLoader(true);
             self.trainData([]);
             $.ajax({
-                url: "https://davidrandell.com/trains/apiproxy.php",
+                url: "../apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=' + stationCode },
                 dataType: 'text',
                 success: function (resp) {
