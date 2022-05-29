@@ -1,0 +1,657 @@
+@charset "UTF-8";
+
+/* CSS RESET */
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+* {
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    position: relative;
+}
+
+
+/* Broad Strokes */
+
+html {
+    height: 100%;
+}
+
+body {
+    background: rgba(52, 99, 141, 1);
+    background: -ms-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
+    background: -moz-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
+    background: -o-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
+    background: -webkit-gradient(radial, left top, left bottom, color-stop(0%, rgba(135, 193, 244, 1)), color-stop(100%, rgba(52, 99, 141, 1)));
+    background: -webkit-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
+    background: radial-gradient(circle farthest-corner at center top, rgba(52, 99, 141, 1) 0%, rgba(135, 193, 244, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.Gradient(startColorstr='#87c1f4', endColorstr='#34638d', GradientType=0);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 100%;
+    height: 100%;
+    margin: 0;
+    text-shadow: 0px 1px 1px #222;
+}
+
+p {
+    color: rgba(52, 99, 141, 1);
+}
+
+strong {
+    font-weight: 900;
+}
+
+#wrapper {
+    min-width: 320px;
+    padding-bottom: 30px;
+    width: 100%;
+    z-index: 1;
+}
+
+
+/*Header Styles*/
+
+header {
+    width: 100%;
+    line-height: 5%;
+    text-align: center;
+    background-color: #f3f3f3;
+    box-shadow: 0 5px 10px rgba(58, 101, 121, .5);
+    z-index: 2;
+    padding: 15px 0px 10px;
+}
+
+header fieldset {
+    width: 48%;
+}
+
+header select {
+    background-color: rgba(52, 99, 141, 1);
+    border: none;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #3A3A3A;
+    color: #fff;
+    font-weight: bold;
+    line-height: 20px;
+    margin: 5px;
+    padding: 5px;
+    width: 80%;
+}
+
+header select:hover {
+    background-color: #fff;
+    color: rgba(52, 99, 141, 1);
+}
+
+header label {
+    color: rgba(52, 99, 141, 1);
+    display: block;
+    font-size: .8rem;
+    line-height: .8rem;
+    font-weight: 900;
+    text-shadow: 0px 1px 1px #F1F0F0;
+}
+
+
+/*Content Area*/
+
+.container {
+    max-width: 1004px;
+    margin: 0 auto;
+}
+
+section {
+    margin: 0 auto;
+    -index: 1;
+    min-height: 340px;
+}
+
+#trainTable {
+    width: 62%;
+    float: left;
+}
+
+table {
+    text-align: center;
+    color: #fefefe;
+    width: 98%;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+caption {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+caption span {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+th {
+    text-decoration: underline;
+    padding-bottom: 1rem;
+}
+
+td {
+    font-size: 1rem;
+    padding-bottom: 6px;
+}
+
+.south td {}
+
+td[data-info="Southbound"] {
+    color: #fdff7d;
+}
+
+td[data-info="Northbound"] {
+    color: #9ff899;
+}
+
+tr.tableBreak {
+    padding-top: 5px;
+    border-top: 1px solid #fff;
+    background: red;
+}
+
+.tinyText {
+    clear: both;
+    color: #fff;
+    font-size: .7rem;
+    margin: 0px auto 5px;
+    padding: 0;
+    text-align: center;
+    width: 80%;
+}
+
+#map-canvas {
+    margin: 20px auto 10px;
+    padding: 0px;
+    border: 1px solid #fff;
+    width: 35%;
+    margin-right: 2%;
+    height: 300px;
+    float: right
+}
+
+#myLocationBtn {
+    clear: both;
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+    padding: 8px;
+    border-radius: 4px;
+    color: #F1F0F0;
+    font-weight: bold;
+    border: 1px solid #6B95A9;
+    box-shadow: 0px 2px 2px #3A3A3A;
+    font-size: 1rem;
+    background-color: rgba(52, 99, 141, 1);
+}
+
+#myLocationBtn:hover {
+    background: #fff;
+    box-shadow: 0px 1px 1px rgba(52, 99, 141, .8);
+    color: rgba(52, 99, 141, 1);
+}
+
+
+/*Footer*/
+
+footer p {
+    clear: both;
+    color: #fff;
+    font-size: .7rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+footer a,
+a:focus,
+a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Dropdown Tab*/
+
+#topDescription {
+    z-index: 3;
+}
+
+#tab {
+    background: #fff;
+    border-radius: 50%;
+    border-size: 0 1px 1px 1px;
+    bottom: -35px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 900;
+    height: 12px;
+    left: 45%;
+    left: calc(50% - 34px);
+    padding: 30px;
+    position: absolute;
+    width: 12px;
+    z-index: 4;
+}
+
+#tab span {
+    top: 14px;
+}
+
+#topDescCopy {
+    background: #fff;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 1s ease;
+}
+
+#topDescCopy :first-child {
+    padding-top: .8rem;
+}
+
+#topDescCopy p {
+    font-size: .8rem;
+    line-height: 1.2rem;
+    font-size: .8rem;
+    padding: 0 1rem .5rem;
+    z-index: 5;
+    text-shadow: none;
+}
+
+#tab.active+#topDescCopy {
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
+    max-height: 40rem;
+}
+
+
+/* Float Classes & Clearing */
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+/*CSS Spinner*/
+
+#circularG {
+    position: absolute;
+    top: 49%;
+    left: 45%;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    width: 30px;
+    height: 30px
+}
+
+.circularG {
+    position: absolute;
+    background-color: #FCDB79;
+    width: 7px;
+    height: 7px;
+    -moz-border-radius: 5px;
+    -moz-animation-name: bounce_circularG;
+    -moz-animation-duration: 0.96s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: linear;
+    -webkit-border-radius: 5px;
+    -webkit-animation-name: bounce_circularG;
+    -webkit-animation-duration: 0.96s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;
+    -o-border-radius: 5px;
+    -o-animation-name: bounce_circularG;
+    -o-animation-duration: 0.96s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-direction: linear;
+    -ms-border-radius: 5px;
+    -ms-animation-name: bounce_circularG;
+    -ms-animation-duration: 0.96s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-direction: linear;
+    border-radius: 5px;
+    animation-name: bounce_circularG;
+    animation-duration: 0.96s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+#circularG_1 {
+    left: 0;
+    top: 12px;
+    -moz-animation-delay: 0.36s;
+    -webkit-animation-delay: 0.36s;
+    -o-animation-delay: 0.36s;
+    -ms-animation-delay: 0.36s;
+    animation-delay: 0.36s;
+}
+
+#circularG_2 {
+    left: 3px;
+    top: 3px;
+    -moz-animation-delay: 0.48s;
+    -webkit-animation-delay: 0.48s;
+    -o-animation-delay: 0.48s;
+    -ms-animation-delay: 0.48s;
+    animation-delay: 0.48s;
+}
+
+#circularG_3 {
+    top: 0;
+    left: 12px;
+    -moz-animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+    -o-animation-delay: 0.6s;
+    -ms-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+}
+
+#circularG_4 {
+    right: 3px;
+    top: 3px;
+    -moz-animation-delay: 0.72s;
+    -webkit-animation-delay: 0.72s;
+    -o-animation-delay: 0.72s;
+    -ms-animation-delay: 0.72s;
+    animation-delay: 0.72s;
+}
+
+#circularG_5 {
+    right: 0;
+    top: 12px;
+    -moz-animation-delay: 0.84s;
+    -webkit-animation-delay: 0.84s;
+    -o-animation-delay: 0.84s;
+    -ms-animation-delay: 0.84s;
+    animation-delay: 0.84s;
+}
+
+#circularG_6 {
+    right: 3px;
+    bottom: 3px;
+    -moz-animation-delay: 0.96s;
+    -webkit-animation-delay: 0.96s;
+    -o-animation-delay: 0.96s;
+    -ms-animation-delay: 0.96s;
+    animation-delay: 0.96s;
+}
+
+#circularG_7 {
+    left: 12px;
+    bottom: 0;
+    -moz-animation-delay: 1.08s;
+    -webkit-animation-delay: 1.08s;
+    -o-animation-delay: 1.08s;
+    -ms-animation-delay: 1.08s;
+    animation-delay: 1.08s;
+}
+
+#circularG_8 {
+    left: 3px;
+    bottom: 3px;
+    -moz-animation-delay: 1.2s;
+    -webkit-animation-delay: 1.2s;
+    -o-animation-delay: 1.2s;
+    -ms-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+
+@-moz-keyframes bounce_circularG {
+    0% {
+        -moz-transform: scale(1)
+    }
+    100% {
+        -moz-transform: scale(.3)
+    }
+}
+
+@-webkit-keyframes bounce_circularG {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    100% {
+        -webkit-transform: scale(.3)
+    }
+}
+
+@-o-keyframes bounce_circularG {
+    0% {
+        -o-transform: scale(1)
+    }
+    100% {
+        -o-transform: scale(.3)
+    }
+}
+
+@-ms-keyframes bounce_circularG {
+    0% {
+        -ms-transform: scale(1)
+    }
+    100% {
+        -ms-transform: scale(.3)
+    }
+}
+
+@keyframes bounce_circularG {
+    0% {
+        transform: scale(1)
+    }
+    100% {
+        transform: scale(.3)
+    }
+}
+
+
+/*Responsive Breakpoints*/
+
+@media screen and (max-width: 1004px) {
+    td {
+        font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #map-canvas {
+        float: none;
+        margin-right: auto;
+        margin-top: 0;
+        width: 80%;
+    }
+    #trainTable {
+        float: none;
+        width: 100%;
+    }
+    section {
+        min-height: 230px;
+    }
+    .icon-refresh img {
+        width: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 80%;
+    }
+    td {
+        font-size: .8rem;
+    }
+    #tab {
+        bottom: -20px;
+        height: 8px;
+        left: calc(50% - 15px);
+        padding: 15px;
+        width: 8px;
+    }
+    #tab span {
+        font-size: .8rem;
+        top: 0px;
+    }
+    .hide480 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #topDescription {
+        z-index: 3;
+    }
+    #tab {
+        bottom: -20px;
+        height: 5px;
+        left: calc(50% - 20px);
+        padding: 20px;
+        width: 5px;
+    }
+    #tab span {
+        font-size: .8rem;
+        top: 0px;
+    }
+}

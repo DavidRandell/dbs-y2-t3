@@ -2,49 +2,104 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Test API Client</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="css/master.css" rel="stylesheet">
-  <script>
-    let doIt = () => {
-      let tab = document.getElementById("tab1");
-      let rows = tab1.getElementsByTagName('tr');
-      fetch('https://david.dbsprojects.ie:8080/')
-        .then(response => response.json())
-        .then(data => data.Results.forEach(  //.slice(0,3)
-          x => {
-            let newRow = rows[0].cloneNode(true);
-            let divs = newRow.getElementsByTagName('td');
-            divs[0].innerHTML = x['ID'];
-            divs[1].innerHTML = x['Name'];
-            divs[2].innerHTML = x['Email'];
-            tab1.appendChild(newRow);
-          }
-        )
-        );
-    }
-  </script>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Next Ten Darts! | Get the next 10 Darts or Trains at any Train Station in Ireland!</title>
+    <link rel="stylesheet" href="css/trainapp.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.jpg">
+    <link rel="apple-touch-icon" href="images/icon.jpg">
 </head>
 
 <body>
-      <div class="card">
-        <img src="https://picsum.photos/400/300/" class="card-img-top" alt="Image">
-        <div class="card-body">
-          <h5 class="card-title">Results:</h5>
-          <table id='tab1'>
-            <tr>
-              <td>ID</td>
-              <td>Name</td>
-              <td>Email</td>
-            </tr>
-          </table>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button type="button" class="btn btn-primary" onClick="doIt()">Press Me</button>
+    <div id="wrapper">
+        <div id="topDescription">
+            <div id="tab"><span>?</span></div>
+            <div id="topDescCopy">
+                <p>Hello, you have found my Irish Rail API app, Next 10 Trains.</p>
+                <p>You can filter the trains by Station Type (Commuter, Mainline, Dart etc.) to shorten the list of stations on the right. You can also click on the Map stations pins directly to bring up that particular station. You can also pin your location
+                    on the Google Map by clicking the 'Go to my location' button.</p>
+                <p>Enjoy, David.</p>
+            </div>
         </div>
-      </div>
+        <header class="group">
+            <div class="container">
+                <fieldset class="floatLeft">
+                    <label>Station Type:</label>
+                    <select data-bind="options: stationTypes, value: selectedStationType, optionsText: 'name'">
+        </select>
+                </fieldset>
+                <fieldset class="floatRight">
+                    <label>Station:</label>
+                    <select data-bind="options: stations, value: selectedStation, optionsText: 'StationDesc'">
+        </select>
+                </fieldset>
+            </div>
+        </header>
+        <div class="container">
+
+            <section id="trainTable" class="group" data-bind="if: selectedStation">
+                <div id="circularG" data-bind="visible:displayLoader" style="display:none;">
+                    <div id="circularG_1" class="circularG"> </div>
+                    <div id="circularG_2" class="circularG"> </div>
+                    <div id="circularG_3" class="circularG"> </div>
+                    <div id="circularG_4" class="circularG"> </div>
+                    <div id="circularG_5" class="circularG"> </div>
+                    <div id="circularG_6" class="circularG"> </div>
+                    <div id="circularG_7" class="circularG"> </div>
+                    <div id="circularG_8" class="circularG"> </div>
+                </div>
+
+                <table>
+                    <caption>
+                        <span data-bind="click: refreshTrains" class="icon-refresh"><img src="images/refresh-icon.png" alt="Image of a refresh icon - click to refresh" width="30" /></span>&nbsp;Arrivals to: <span data-bind="text: selectedStation().StationDesc"></span>
+                    </caption>
+                    <tr>
+                        <th class="hide480">Date</th>
+                        <th>Time</th>
+                        <th>Direction</th>
+                        <th>Destination</th>
+                        <th>Departs</th>
+                    </tr>
+                    <!-- ko foreach: trainData -->
+                    <tr data-bind="css: {south: $index() > 0 && $root.trainData()[$index()-1].Direction != Direction }">
+                        <td class="hide480" data-bind="text:Traindate.substring(0, Traindate.length-5)"></td>
+                        <td data-bind="text: Exparrival === '00:00' ? 'Origin' : Exparrival, attr:{'data-info': Exparrival}
+          "></td>
+                        <td class="direction" data-bind="text:$root.cleanStationName(Direction), attr:{'data-info': $root.cleanStationName(Direction)}"></td>
+                        <td data-bind="text:$root.cleanStationName(Destination)"></td>
+                        <td data-bind="text:Expdepart === '00:00' ? 'Last Stop' : $root.getTimespan(Traindate, Expdepart)"></td>
+                    </tr>
+                    <!-- /ko -->
+                </table>
+            </section>
+            <div id="map-canvas"></div>
+            <p class="tinyText">Note: Clicking on a station will center the map and update the timetable for that station. </p>
+            <button id="myLocationBtn" class="gradient" data-bind="click: goToLocation, visible: supportsGeolocation">Go To my Location</button>
+            <footer>
+                <p><a href="mailto:david@davidrandell.com">&copy; David Randell</a></p>
+            </footer>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAsz2SSQorBrC6V9KTJQNnh1GOqagGkc"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/moments.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/app.js"></script>
+    <script>
+        var vm = new AppViewModel();
+        ko.applyBindings(vm);
+        window.onload = vm.initializeMap;
+
+        $(document).ready(function() {
+            $('#tab').on('click', function() {
+                $(this).toggleClass('active');
+            });
+            $('td[data-info="00:00"]').first().parent().addClass('tableBreak');
+            // $('td[data-info="00:00"]').eq(0)(function() {
+            //     $(this).parent().addClass('tableBreak');
+            // });
+        });
+    </script>
 </body>
 
 </html>
