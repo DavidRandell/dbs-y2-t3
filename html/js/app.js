@@ -76,7 +76,7 @@ class AppViewModel {
                     let objStation = [];
                     console.log("Hello World 2");
                     let nodeStation = tree.getElementsByTagName("objStation");   
-                    console.log("Hello World 3");
+                    console.log(tree);
                     Array.from(nodeStation).forEach(x => {
                         console.log("Array Loop");
                         let station = {};
