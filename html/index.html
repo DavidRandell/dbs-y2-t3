@@ -104,7 +104,7 @@
                 let day = moment().format('dddd');
                 let date = moment().format("MMM Do YY");
                 let fullDate = `<span>Date: ${day}, ${date}</span>`;
-                document.getElementById("#date-time").innerHTML = fullDate;
+                $('#date-time').text(fullDate);
         });
     </script>
 </body>
