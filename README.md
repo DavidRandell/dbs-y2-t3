@@ -1,3 +1,2 @@
-# dbs-app
-DBS Project App
-test content
+# Next Ten Trains
+Next Ten Trains is an application that allows the user to select any train station in Ireland. The user can select through a Dropdown filtering system or select the Station by clicking directly on a Google Map which also displays all stations. Once a selection is made, the App will then update the Google Map, centering on the station's location, and display a list of up to 10 Trains arriving/departing from the selected station. The App will also have geolocation capabilities which will help the user to identify the closest station to their present location.
