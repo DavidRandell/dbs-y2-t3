@@ -3,7 +3,7 @@
 /* CSS RESET */
 
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -142,16 +142,9 @@ html {
 }
 
 body {
-    background: rgba(52, 99, 141, 1);
-    background: -ms-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
-    background: -moz-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
-    background: -o-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
-    background: -webkit-gradient(radial, left top, left bottom, color-stop(0%, rgba(135, 193, 244, 1)), color-stop(100%, rgba(52, 99, 141, 1)));
-    background: -webkit-radial-gradient(center top, circle cover, rgba(135, 193, 244, 1) 0%, rgba(52, 99, 141, 1) 100%);
-    background: radial-gradient(circle farthest-corner at center top, rgba(52, 99, 141, 1) 0%, rgba(135, 193, 244, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.Gradient(startColorstr='#87c1f4', endColorstr='#34638d', GradientType=0);
-    background-attachment: fixed;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-size: auto;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 100%;
     height: 100%;
@@ -185,6 +178,10 @@ header {
     box-shadow: 0 5px 10px rgba(58, 101, 121, .5);
     z-index: 2;
     padding: 15px 0px 10px;
+}
+
+header .container {
+  background-color: #f3f3f3;
 }
 
 header fieldset {
@@ -222,8 +219,12 @@ header label {
 /*Content Area*/
 
 .container {
-    max-width: 1004px;
-    margin: 0 auto;
+  max-width: 1004px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 0 0 30px 30px;
+  padding: 20px 20px 20px;
+
 }
 
 section {
@@ -240,19 +241,18 @@ section {
 table {
     text-align: center;
     color: #fefefe;
-    width: 98%;
-    margin: 20px auto;
-    padding: 5px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 caption {
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 caption span {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
 }
 
@@ -262,8 +262,24 @@ th {
 }
 
 td {
-    font-size: 1rem;
-    padding-bottom: 6px;
+    font-size: 1.1rem;
+    line-height: 26px;
+}
+
+.noTrains {
+  color: white;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 10px 20px;
+  line-height: 40px;
+  display:none;
+}
+
+.noTrains:last-of-type {display:block;}
+
+.stopStatus {
+  line-height: 26px;
 }
 
 .south td {}
@@ -272,8 +288,22 @@ td[data-info="Southbound"] {
     color: #fdff7d;
 }
 
+td[data-info="Southbound"]::before {
+    content: '\2B07 ';
+}
+
+
 td[data-info="Northbound"] {
     color: #9ff899;
+}
+
+td[data-info="Northbound"]::before {
+  content: '\2B06 ';
+}
+
+td[data-info="Last Stop"]::before {
+  content: 'X';
+  color: red;
 }
 
 tr.tableBreak {
@@ -285,7 +315,7 @@ tr.tableBreak {
 .tinyText {
     clear: both;
     color: #fff;
-    font-size: .7rem;
+    font-size: .8rem;
     margin: 0px auto 5px;
     padding: 0;
     text-align: center;

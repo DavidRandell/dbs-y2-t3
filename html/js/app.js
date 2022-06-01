@@ -47,6 +47,7 @@ class AppViewModel {
 
                 // Change Selected Station onClick
                 google.maps.event.addListener(marker, 'click', function () {
+                    self.clearBoxes();
                     self.selectedStation(this.station);
                 });
 
@@ -65,23 +66,26 @@ class AppViewModel {
         self.loadStations = function (selectedStationType) {
 
             $.ajax({
-                url: "https://david.dbsprojects.ie/apiproxy.php",
+                url: "https://davidrandell.com/trains/apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=' + selectedStationType },
                 dataType: 'text',
                 success: function (resp) {
-                    let parser = new DOMParser(); 
+                    //console.log("Hello World 0");
+                    let parser = new DOMParser();
                     let tree = parser.parseFromString(resp,'text/xml');
+
                     let objStation = [];
-                    let nodeStation = tree.getElementsByTagName("objStation");   
+
+                    let nodeStation = tree.getElementsByTagName("objStation");
+
                     Array.from(nodeStation).forEach(x => {
-                        console.log("Array Loop");
                         let station = {};
                         station["StationDesc"] = x.getElementsByTagName("StationDesc")[0].textContent;
                         station["StationLatitude"] = x.getElementsByTagName("StationLatitude")[0].textContent;
                         station["StationLongitude"] = x.getElementsByTagName("StationLongitude")[0].textContent;
                         station["StationCode"] = x.getElementsByTagName("StationCode")[0].textContent;
                         station["StationId"] = x.getElementsByTagName("StationId")[0].textContent;
-                        console.log(station);
+                        //console.log(station);
                         objStation.push(station);
                     });
 
@@ -92,7 +96,7 @@ class AppViewModel {
                         return left.StationDesc == right.StationDesc ? 0 : (left.StationDesc < right.StationDesc ? -1 : 1);
                     });
 
-                    self.selectedStation(self.findStationByCode("CNLLY"));
+                    self.selectedStation(self.findStationByCode("PERSE"));
                 },
                 error: function (a, b, c) {
                     console.log(' Load Stations Error');s
@@ -146,7 +150,7 @@ class AppViewModel {
                     // Add Marker
                     self.locationMarker = new google.maps.Marker({
                         position: pos,
-                        icon: '../images/yourLocation.png',
+                        icon: 'https://davidrandell.com/trains/images/yourLocation.png',
                         map: self.map()
                     });
                 });
@@ -155,21 +159,20 @@ class AppViewModel {
         // Load Train Data based on Station selected
         self.trainData = ko.observableArray([]);
         self.loadTrainsForStation = function (stationCode) {
+            self.clearBoxes();
             self.displayLoader(true);
             self.trainData([]);
             $.ajax({
-                url: "https://david.dbsprojects.ie/apiproxy.php",
+                url: "https://davidrandell.com/trains/apiproxy.php",
                 data: { url: 'https://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=' + stationCode },
                 dataType: 'text',
                 success: function (resp) {
-                    let parser = new DOMParser(); 
+                    let parser = new DOMParser();
                     let tree = parser.parseFromString(resp,'text/xml');
-
-
 
                     let objStationData = [];
 
-                    let nodeStationData = tree.getElementsByTagName("objStationData");   
+                    let nodeStationData = tree.getElementsByTagName("objStationData");
 
                     Array.from(nodeStationData).forEach(x => {
                         let trainData = {};
@@ -178,39 +181,24 @@ class AppViewModel {
                         trainData["Direction"] = x.getElementsByTagName("Direction")[0].textContent;
                         trainData["Destination"] = x.getElementsByTagName("Destination")[0].textContent;
                         trainData["Expdepart"] = x.getElementsByTagName("Expdepart")[0].textContent;
-                        console.log(trainData);
+                        //console.log(trainData);
                         objStationData.push(trainData);
                     });
 
-
-                    // If no trains
+                    // If there are no upcomming trains
                     self.trainData(objStationData);
-                    if (self.trainData().length < 1) {
-                        //console.log("No More Trains today");
-                        let noTrainsElement = document.getElementById("noTrains");
-                        noTrainsElement.textContent += "No More Trains Today";
-                    } else {
-                        // Return up to ten results
-                        //var trains = resp.objStationData;
-                        // Start of new code
-                        self.trainData(objStationData);
-                        self.trainData.sort(function (left, right) { return left.Expdepart == right.Expdepart ? 0 : (left.Expdepart < right.Expdepart ? -1 : 1); });
-                        console.log(self.trainData());
-                        // End of New Code
-                        if (self.trainData() && self.trainData().length > 10) {
-                            console.log('true');
-                            self.trainData(self.trainData().slice(0, 9));
-                        }
+                    if (self.trainData().length === 0) {
+                        //console.log("No More Trains today")
                         self.displayLoader(false);
+                        //populate the DOM element if there are no more trains for today ad display to the user.
+                        let noTrains = document.createElement('div'); // is a node
+                        noTrains.setAttribute('class', 'noTrains');
+                        noTrains.innerHTML = 'No More Trains Today';
+                        document.getElementById('trainTable').appendChild(noTrains);
+
                     }
+                    //  If there are upcomming trains return up to ten results
 
-/*
-                    // end of no trains test
-
-                    // Return up to ten results
-                    //var trains = resp.objStationData;
-                    // Start of new code
-                    self.trainData(objStationData);
                     self.trainData.sort(function (left, right) { return left.Expdepart == right.Expdepart ? 0 : (left.Expdepart < right.Expdepart ? -1 : 1); });
                     console.log(self.trainData());
                     // End of New Code
@@ -219,7 +207,7 @@ class AppViewModel {
                         self.trainData(self.trainData().slice(0, 9));
                     }
                     self.displayLoader(false);
-*/
+
                 },
                 error: function (_a, _b, _c) {
                     console.log('Load Trains for Station Error');
@@ -252,5 +240,12 @@ class AppViewModel {
             self.map(new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions));
         };
+
+        self.clearBoxes = function(){
+          const boxes = document.querySelectorAll('.noTrains');
+          boxes.forEach(box => {
+            box.remove();
+          });
+        }
     }
 }
