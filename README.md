@@ -1,11 +1,7 @@
 ## Next Ten Trains
-
-
 ### 01.06.2022
 
-**─ \
-**APP: [NEXT TEN TRAINS](https://davidrandell.com/trains/) \
-GITHUB: [REPO](https://github.com/DavidRandell/dbs-y2-t3)
+APP: [NEXT TEN TRAINS](https://davidrandell.com/trains/)
 
 David Randell
 
@@ -22,21 +18,9 @@ Lecturer: Paul Laird
 
 Next Ten Trains is an application that allows the user to select any train station in Ireland. The user can select through a Dropdown filtering system or select the Station by clicking directly on a Google Map which also displays all stations. Once a selection is made, the App will then update the Google Map, centering on the station's location, and display a list of up to 10 Trains arriving/departing from the selected station. The App will also have geolocation capabilities which will help the user to identify the closest station to their present location.
 
-
 ### VISIT THE APP: [NEXT TEN TRAINS](https://davidrandell.com/trains/)
 
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
-
-
 ## Goals & Requirements
-
-
 
 1. Google Map **displaying** all Stations located in Ireland with stations being **clickable**. The Map will automatically center on any selected station.
 2. **Searching** is accomplished through a dropdown **filtering** system to select the type of train (Dart, Mainline etc.) and then Stations on the selected line.
@@ -46,14 +30,9 @@ Next Ten Trains is an application that allows the user to select any train stati
 6. **Irish Rail API **will provide the data. The APP will use the data to **search** stations, **sort** train times, **get** station Latitude and Longitude coordinates to **update** the Google Map.
 7. PHP proxy to **consume** the API, **validate** the **integrity** of the Data and hand the **response** to the JS to build the Stations and Train Objects and Arrays.
 
-
-##
-
-
 ## Specifications and Implementation
 
 The following is a list of Technologies and Services to provide the functionality of Next Ten Trains along with an explanation of how it was leveraged and used.
-
 
 
 1. JavaScript & Jquery
@@ -114,7 +93,6 @@ There is accommodations in place for a ‘no response’ from the API \
 **User Journey Testing Expectations**
 
 
-
 * On page load the user should see:
     * A Random background image displayed on the Body tag.
     * All Stations listed by default and the default selected station being Dublin: Pearse.
@@ -160,9 +138,6 @@ Unfortunately, I ran into a technology limitation which forced me to have to lea
 
 1. My shared hosting server would not allow CLI access nor would it run the Flask Python library. So I couldn’t add the Flask functionality.
 2. When I deployed the APP to the DBS Azure server the PHP Proxy/API call stopped working, effectively rendering the App dead. I wasn’t able to solve the issue so I could not build any Flask functionality into the App.
-
-
-##
 
 
 ## Bibliography of Technologies and Websites
