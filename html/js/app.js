@@ -183,7 +183,29 @@ class AppViewModel {
                     });
 
 
+                    // If no trains
+                    self.trainData(objStationData);
+                    if (self.trainData().length < 1) {
+                        //console.log("No More Trains today");
+                        let noTrainsElement = document.getElementById("noTrains");
+                        noTrainsElement.textContent += "No More Trains Today";
+                    } else {
+                        // Return up to ten results
+                        //var trains = resp.objStationData;
+                        // Start of new code
+                        self.trainData(objStationData);
+                        self.trainData.sort(function (left, right) { return left.Expdepart == right.Expdepart ? 0 : (left.Expdepart < right.Expdepart ? -1 : 1); });
+                        console.log(self.trainData());
+                        // End of New Code
+                        if (self.trainData() && self.trainData().length > 10) {
+                            console.log('true');
+                            self.trainData(self.trainData().slice(0, 9));
+                        }
+                        self.displayLoader(false);
+                    }
 
+/*
+                    // end of no trains test
 
                     // Return up to ten results
                     //var trains = resp.objStationData;
@@ -197,7 +219,7 @@ class AppViewModel {
                         self.trainData(self.trainData().slice(0, 9));
                     }
                     self.displayLoader(false);
-
+*/
                 },
                 error: function (_a, _b, _c) {
                     console.log('Load Trains for Station Error');

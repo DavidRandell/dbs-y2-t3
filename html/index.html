@@ -52,7 +52,6 @@
                 <table>
                     <caption>
                         <span data-bind="click: refreshTrains" class="icon-refresh"><img src="images/refresh-icon.png" alt="Image of a refresh icon - click to refresh" width="30" /></span>&nbsp;Arrivals to: <span data-bind="text: selectedStation().StationDesc"></span>
-                        <p id="date-time">Time Here?</p>
                     </caption>
                     <tr>
                         <th class="hide480">Date</th>
@@ -61,6 +60,7 @@
                         <th>Destination</th>
                         <th>Departs</th>
                     </tr>
+                    <tr><td id="noTrains"></td></tr>
                     <!-- ko foreach: trainData -->
                     <tr data-bind="css: {south: $index() > 0 && $root.trainData()[$index()-1].Direction != Direction }">
                         <td class="hide480" data-bind="text:Traindate.substring(0, Traindate.length-5)"></td>
