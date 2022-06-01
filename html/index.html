@@ -4,18 +4,26 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Next Ten Darts! | Get the next 10 Darts or Trains at any Train Station in Ireland!</title>
+    <title>Next Ten Trains! | Get the next 10 Darts or Trains at any Train Station in Ireland!</title>
     <link rel="stylesheet" href="css/trainapp.css" />
     <link rel="shortcut icon" type="image/x-icon" href="images/icon.jpg">
     <link rel="apple-touch-icon" href="images/icon.jpg">
+    <script type="text/javascript">
+    let totalCount = 4;
+      function ChangeIt()
+      {
+      var num = Math.ceil( Math.random() * totalCount );
+      document.body.background = 'images/background'+num+'-min.jpeg';
+      }
+    </script>
 </head>
 
-<body>
+<body id="random">
     <div id="wrapper">
-        <div id="topDescription">
+        <div id="topDescriaption">
             <div id="tab"><span>?</span></div>
             <div id="topDescCopy">
-                <p>Hello, you have found my Irish Rail API app, Next 10 Trains.</p>
+                <p>Hello, you have found my Irish Rail API app, Next Ten Trains.</p>
                 <p>You can filter the trains by Station Type (Commuter, Mainline, Dart etc.) to shorten the list of stations on the right. You can also click on the Map stations pins directly to bring up that particular station. You can also pin your location
                     on the Google Map by clicking the 'Go to my location' button.</p>
                 <p>Enjoy, David.</p>
@@ -60,7 +68,6 @@
                         <th>Destination</th>
                         <th>Departs</th>
                     </tr>
-                    <tr><td id="noTrains"></td></tr>
                     <!-- ko foreach: trainData -->
                     <tr data-bind="css: {south: $index() > 0 && $root.trainData()[$index()-1].Direction != Direction }">
                         <td class="hide480" data-bind="text:Traindate.substring(0, Traindate.length-5)"></td>
@@ -68,30 +75,35 @@
           "></td>
                         <td class="direction" data-bind="text:$root.cleanStationName(Direction), attr:{'data-info': $root.cleanStationName(Direction)}"></td>
                         <td data-bind="text:$root.cleanStationName(Destination)"></td>
-                        <td data-bind="text:Expdepart === '00:00' ? 'Last Stop' : $root.getTimespan(Traindate, Expdepart)"></td>
+                        <td class="stopStatus" data-bind="text:Expdepart === '00:00' ? '🛑 Last Stop' : $root.getTimespan(Traindate, Expdepart)"></td>
                     </tr>
                     <!-- /ko -->
                 </table>
+                <div id="noResultsWindow">
+                  &nbsp;
+                </div>
             </section>
             <div id="map-canvas"></div>
             <p class="tinyText">Note: Clicking on a station will center the map and update the timetable for that station. </p>
             <button id="myLocationBtn" class="gradient" data-bind="click: goToLocation, visible: supportsGeolocation">Go To my Location</button>
             <footer>
-                <p><a href="mailto:david@davidrandell.com">&copy; David Randell</a></p>
+                <p><a href="mailto:david@davidrandell.com">&copy; 2022 David Randell | A DBS Project Submission</a></p>
             </footer>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqk0HhinLu9FRUng1ohR-HJLiq2ZNzGy4"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOAsz2SSQorBrC6V9KTJQNnh1GOqagGkc"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/moments.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/app.js"></script>   
+    <script src="js/app.js"></script>
+    <script src="js/scripts.js"></script>
     <script>
         var vm = new AppViewModel();
         ko.applyBindings(vm);
         window.onload = vm.initializeMap;
 
         $(document).ready(function() {
+            ChangeIt();
             $('#tab').on('click', function() {
                 $(this).toggleClass('active');
             });
@@ -99,12 +111,7 @@
             // $('td[data-info="00:00"]').eq(0)(function() {
             //     $(this).parent().addClass('tableBreak');
             // });
-        });
-        $(document).ready(function() {
-                let day = moment().format('dddd');
-                let date = moment().format("MMM Do YY");
-                let fullDate = `<span>Date: ${day}, ${date}</span>`;
-                $('#date-time').text(fullDate);
+
         });
     </script>
 </body>
